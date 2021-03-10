@@ -4,6 +4,7 @@ export interface User {
   emil: string;
   title: string;
   organization: string;
+  token: string;
 }
 interface SearchPanelProps {
   users: User[];
