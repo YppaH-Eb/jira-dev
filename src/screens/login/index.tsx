@@ -1,9 +1,9 @@
 import { FormEvent } from "react";
-import qs from "qs";
-import { cleanObject } from "../../utils";
 import { login } from "../../auth-provider";
+import { useAuth } from "../../context/auth-context";
 
 export const LoginScreen = () => {
+  const { user, login, register } = useAuth();
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const username = (event.currentTarget.elements[0] as HTMLInputElement)
@@ -14,6 +14,12 @@ export const LoginScreen = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
+      {user ? (
+        <div>
+          登录成功，用户名：{user.name}
+          {user.token}
+        </div>
+      ) : null}
       <div>
         <label htmlFor="username">用户名</label>
         <input type="text" id="username" />
