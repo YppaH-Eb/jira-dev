@@ -1,22 +1,31 @@
 import { ProjectListScreen } from "./screens/project-list";
 import { useAuth } from "./context/auth-context";
-import { Button } from "antd";
+import { Button, Dropdown, Menu } from "antd";
 import styled from "@emotion/styled";
 import { Row } from "./Components/lib";
+import { ReactComponent as SoftwareLogo } from "./assets/software-logo.svg";
 
 export const AuthenticatedApp = () => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   return (
     <Container>
-      <Header>
-        <HeaderLeft gap={2} between={true}>
-          <div>logo</div>
+      <Header between={true}>
+        <HeaderLeft gap={2}>
+          <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
           <div>项目</div>
           <div>用户</div>
         </HeaderLeft>
-        <Button type={"primary"} onClick={logout}>
-          登出
-        </Button>
+        <Dropdown
+          overlay={
+            <Menu>
+              <Menu.Item key={"logout"}>
+                <a onClick={logout}>登出</a>
+              </Menu.Item>
+            </Menu>
+          }
+        >
+          <a onClick={(e) => e.preventDefault()}>Hi,{user?.name}</a>
+        </Dropdown>
       </Header>
       <Main>
         <ProjectListScreen />
@@ -31,18 +40,11 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-const Header = styled.header`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+const Header = styled(Row)`
+  padding: 3.2rem;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  z-index: 1;
 `;
-const HeaderLeft = styled(Row)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+const HeaderLeft = styled(Row)``;
 
-const Main = styled.div`
-  height: calc(100vh - 6rem);
-`;
+const Main = styled.div``;
