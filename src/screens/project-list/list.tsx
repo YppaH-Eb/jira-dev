@@ -1,6 +1,7 @@
 import { User } from "./search-panel";
 import { Table, TableProps } from "antd";
 import dayjs from "dayjs";
+import { Link } from "react-router-dom";
 
 export interface Project {
   name: string;
@@ -18,6 +19,9 @@ export const List = ({ users, ...props }: ListProps) => {
     {
       title: "名称",
       dataIndex: "name",
+      render(value, project) {
+        return <Link to={project.id.toString()}>{project.name}</Link>;
+      },
     },
     {
       title: "部门",

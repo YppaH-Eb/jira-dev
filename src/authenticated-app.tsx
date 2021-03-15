@@ -5,32 +5,51 @@ import styled from "@emotion/styled";
 import { Row } from "./Components/lib";
 import { ReactComponent as SoftwareLogo } from "./assets/software-logo.svg";
 
+import { Route, Navigate, Routes } from "react-router";
+import { BrowserRouter as Router } from "react-router-dom";
+import { ProjectScreen } from "./screens/project";
 export const AuthenticatedApp = () => {
-  const { logout, user } = useAuth();
   return (
     <Container>
-      <Header between={true}>
-        <HeaderLeft gap={2}>
-          <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
-          <div>项目</div>
-          <div>用户</div>
-        </HeaderLeft>
-        <Dropdown
-          overlay={
-            <Menu>
-              <Menu.Item key={"logout"}>
-                <a onClick={logout}>登出</a>
-              </Menu.Item>
-            </Menu>
-          }
-        >
-          <a onClick={(e) => e.preventDefault()}>Hi,{user?.name}</a>
-        </Dropdown>
-      </Header>
+      <PageHeader />
       <Main>
-        <ProjectListScreen />
+        {/*<ProjectListScreen />*/}
+        <Router>
+          <Routes>
+            <Route path={"/projects"} element={<ProjectListScreen />}></Route>
+            <Route
+              path={"/projects/:projectId/*"}
+              element={<ProjectScreen />}
+            ></Route>
+            <Navigate to={`/projects`} />
+          </Routes>
+        </Router>
       </Main>
     </Container>
+  );
+};
+
+const PageHeader = () => {
+  const { logout, user } = useAuth();
+  return (
+    <Header between={true}>
+      <HeaderLeft gap={2}>
+        <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
+        <div>项目</div>
+        <div>用户</div>
+      </HeaderLeft>
+      <Dropdown
+        overlay={
+          <Menu>
+            <Menu.Item key={"logout"}>
+              <a onClick={logout}>登出</a>
+            </Menu.Item>
+          </Menu>
+        }
+      >
+        <a onClick={(e) => e.preventDefault()}>Hi,{user?.name}</a>
+      </Dropdown>
+    </Header>
   );
 };
 
