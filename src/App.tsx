@@ -5,9 +5,11 @@ import { AuthenticatedApp } from "./authenticated-app";
 import { UnauthenticatedApp } from "./unauthenticated-app";
 import { ErrorBoundary } from "./Components/error-boundary";
 import { FullPageErrorFallback } from "./Components/lib";
+import { useDocumentTitle } from "./utils";
 
 function App() {
   const { user } = useAuth();
+  useDocumentTitle("请登录或注册以继续");
   return (
     <div className="App">
       <ErrorBoundary fallbackRender={FullPageErrorFallback}>

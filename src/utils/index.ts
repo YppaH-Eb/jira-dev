@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { doc } from "prettier";
 
 export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 export const isVoid = (value: unknown) =>
@@ -33,4 +34,18 @@ export const useDebounce = <V>(param: V, delay?: number) => {
     return () => clearTimeout(timeout);
   }, [param, delay]);
   return debouncedValue;
+};
+
+export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
+  const oldTitle = useRef(document.title).current;
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+  useEffect(() => {
+    return () => {
+      if (!keepOnUnmount) {
+        document.title = oldTitle;
+      }
+    };
+  }, [keepOnUnmount, oldTitle]);
 };
