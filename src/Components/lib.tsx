@@ -40,3 +40,5 @@ export const FullPageErrorFallback = ({ error }: { error: Error | null }) => (
     <Typography.Text type={"danger"}> {error?.message}</Typography.Text>
   </FullPage>
 );
+
+export const resetRoute = () => (window.location.href = window.location.origin);

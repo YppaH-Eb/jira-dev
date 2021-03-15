@@ -2,7 +2,7 @@ import { ProjectListScreen } from "./screens/project-list";
 import { useAuth } from "./context/auth-context";
 import { Button, Dropdown, Menu } from "antd";
 import styled from "@emotion/styled";
-import { Row } from "./Components/lib";
+import { resetRoute, Row } from "./Components/lib";
 import { ReactComponent as SoftwareLogo } from "./assets/software-logo.svg";
 
 import { Route, Navigate, Routes } from "react-router";
@@ -34,7 +34,9 @@ const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={2}>
-        <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
+        <Button type={"link"} onClick={resetRoute}>
+          <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
+        </Button>
         <div>项目</div>
         <div>用户</div>
       </HeaderLeft>
