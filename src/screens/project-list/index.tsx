@@ -3,11 +3,10 @@ import { SearchPanel } from "./search-panel";
 import { List } from "./list";
 import { useDebounce, useDocumentTitle } from "../../utils";
 import styled from "@emotion/styled";
-import { useProject } from "../../utils/useProject";
-import { useUsers } from "../../utils/useUsers";
+import { useUsers } from "../../utils/users";
 import { Typography } from "antd";
-import { useUrlQueryParams } from "../../utils/url";
 import { useProjectSearchParams } from "./utils";
+import { useProject } from "../../utils/project";
 
 export const ProjectListScreen = () => {
   // const [param, setParam] = useState({

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { cleanObject } from "./index";
 import { useHttp } from "./http";
-import { useAsync } from "./useAsync";
+import { useAsync } from "./use-async";
 import { User } from "../screens/project-list/search-panel";
 
 export const useUsers = (params?: Partial<User>) => {

@@ -1,4 +1,4 @@
-import { useUsers } from "../utils/useUsers";
+import { useUsers } from "../utils/users";
 import { IdSelect } from "./id-select";
 import { ReactChild } from "react";
 
