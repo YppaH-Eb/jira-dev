@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 export interface Project {
   name: string;
-  personId: string;
-  id: string;
+  personId: number;
+  id: number;
   pin: boolean;
   organization: string;
 }
