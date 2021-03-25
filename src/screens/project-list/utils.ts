@@ -11,3 +11,13 @@ export const useProjectSearchParams = () => {
     setParam,
   ] as const;
 };
+
+export const useProjectModal = () => {
+  const [{ projectModal }, setProjectCreate] = useUrlQueryParams([
+    "projectModal",
+  ]);
+
+  const open = () => setProjectCreate({ projectModal: true });
+  const close = () => setProjectCreate({ projectModal: false });
+  return [projectModal === "true", open, close] as const;
+};

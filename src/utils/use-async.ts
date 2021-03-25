@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useMountedRef } from "./index";
 
 interface State<D> {
   error: Error | null;
@@ -26,7 +27,7 @@ export const useAsync = <D>(
     ...initialState,
   });
   const [retry, setRetry] = useState(() => () => {});
-
+  const mountedRef = useMountedRef();
   const setData = (data: D) =>
     setState({
       error: null,
@@ -60,7 +61,10 @@ export const useAsync = <D>(
     });
     return promise
       .then((data) => {
-        setData(data);
+        if (mountedRef.current) {
+          //如果组件尚未卸载
+          setData(data);
+        }
         return data;
       })
       .catch((error) => {
