@@ -4,7 +4,7 @@ import { List } from "./list";
 import { useDebounce, useDocumentTitle } from "../../utils";
 import styled from "@emotion/styled";
 import { useUsers } from "../../utils/users";
-import { Typography } from "antd";
+import { Button, Typography } from "antd";
 import { useProjectSearchParams } from "./utils";
 import { useProject } from "../../utils/project";
 
@@ -15,7 +15,7 @@ export const ProjectListScreen = () => {
   // });
   const [param, setParam] = useProjectSearchParams();
   const debouncedParam = useDebounce(param, 500);
-  const { isLoading, error, data: list } = useProject(debouncedParam);
+  const { isLoading, error, data: list, retry } = useProject(debouncedParam);
   const { data: users } = useUsers();
   useDocumentTitle("项目列表", false);
   return (
@@ -25,7 +25,12 @@ export const ProjectListScreen = () => {
       {error && (
         <Typography.Text type={"danger"}>{error.message}</Typography.Text>
       )}
-      <List loading={isLoading} dataSource={list || []} users={users || []} />
+      <List
+        refresh={retry}
+        loading={isLoading}
+        dataSource={list || []}
+        users={users || []}
+      />
     </Container>
   );
 };

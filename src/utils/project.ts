@@ -7,8 +7,10 @@ import { Project } from "../screens/project-list/list";
 export const useProject = (params?: Partial<Project>) => {
   const client = useHttp();
   const { run, ...result } = useAsync<Project[]>();
+  const fetchProject = () =>
+    client("projects", { data: cleanObject(params || {}) });
   useEffect(() => {
-    run(client("projects", { data: cleanObject(params || {}) }));
+    run(fetchProject(), { retry: fetchProject });
   }, [params]);
   return result;
 };
