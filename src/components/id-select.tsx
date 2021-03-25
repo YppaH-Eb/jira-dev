@@ -1,4 +1,4 @@
-import { Row } from "../types";
+import { Row } from "types";
 import { Select } from "antd";
 
 type SelectProps = React.ComponentProps<typeof Select>;

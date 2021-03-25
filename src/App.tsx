@@ -3,8 +3,8 @@ import "./App.css";
 import { useAuth } from "./context/auth-context";
 import { AuthenticatedApp } from "./authenticated-app";
 import { UnauthenticatedApp } from "./unauthenticated-app";
-import { ErrorBoundary } from "./Components/error-boundary";
-import { FullPageErrorFallback } from "./Components/lib";
+import { ErrorBoundary } from "components/error-boundary";
+import { FullPageErrorFallback } from "components/lib";
 import { useDocumentTitle } from "./utils";
 
 function App() {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useMountedRef } from "./index";
 
 interface State<D> {
@@ -42,38 +42,38 @@ export const useAsync = <D>(
       stat: "error",
     });
 
-  const run = (
-    promise: Promise<D>,
-    runConfig?: { retry: () => Promise<D> }
-  ) => {
-    if (!promise || !promise.then) {
-      throw new Error("请传入Promise类型数据");
-    }
-    setRetry(() => () => {
-      if (runConfig?.retry) {
-        run(runConfig?.retry(), runConfig);
+  const run = useCallback(
+    (promise: Promise<D>, runConfig?: { retry: () => Promise<D> }) => {
+      if (!promise || !promise.then) {
+        throw new Error("请传入Promise类型数据");
       }
-    });
-    setState({
-      error: null,
-      stat: "loading",
-      data: null,
-    });
-    return promise
-      .then((data) => {
-        if (mountedRef.current) {
-          //如果组件尚未卸载
-          setData(data);
+      setRetry(() => () => {
+        if (runConfig?.retry) {
+          run(runConfig?.retry(), runConfig);
         }
-        return data;
-      })
-      .catch((error) => {
-        //catch会消化异常，不主动抛出后边就接收不到了
-        setError(error);
-        if (config.throwOnError) return Promise.reject(error);
-        return error;
       });
-  };
+      setState({
+        error: null,
+        stat: "loading",
+        data: null,
+      });
+      return promise
+        .then((data) => {
+          if (mountedRef.current) {
+            //如果组件尚未卸载
+            setData(data);
+          }
+          return data;
+        })
+        .catch((error) => {
+          //catch会消化异常，不主动抛出后边就接收不到了
+          setError(error);
+          if (config.throwOnError) return Promise.reject(error);
+          return error;
+        });
+    },
+    [config.throwOnError, mountedRef, setData, state]
+  );
 
   return {
     isIdle: state.stat === "idle",

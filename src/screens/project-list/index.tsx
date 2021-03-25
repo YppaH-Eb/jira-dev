@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { SearchPanel } from "./search-panel";
 import { List } from "./list";
-import { useDebounce, useDocumentTitle } from "../../utils";
+import { useDebounce, useDocumentTitle } from "utils";
 import styled from "@emotion/styled";
-import { useUsers } from "../../utils/users";
+import { useUsers } from "utils/users";
 import { Button, Typography } from "antd";
 import { useProjectSearchParams } from "./utils";
-import { useProject } from "../../utils/project";
+import { useProject } from "utils/project";
 
 export const ProjectListScreen = () => {
   // const [param, setParam] = useState({

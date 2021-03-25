@@ -1,7 +1,7 @@
 import { Form, Input } from "antd";
-import { register } from "../auth-provider";
+import { register } from "auth-provider";
 import { LongButton } from "./index";
-import { useAsync } from "../utils/use-async";
+import { useAsync } from "utils/use-async";
 export const RegisterScreen = ({
   onError,
 }: {

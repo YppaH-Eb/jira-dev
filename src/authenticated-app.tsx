@@ -1,13 +1,13 @@
-import { ProjectListScreen } from "./screens/project-list";
-import { useAuth } from "./context/auth-context";
+import { ProjectListScreen } from "screens/project-list";
+import { useAuth } from "context/auth-context";
 import { Button, Dropdown, Menu } from "antd";
 import styled from "@emotion/styled";
-import { resetRoute, Row } from "./Components/lib";
-import { ReactComponent as SoftwareLogo } from "./assets/software-logo.svg";
+import { resetRoute, Row } from "components/lib";
+import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
 
 import { Route, Navigate, Routes } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ProjectScreen } from "./screens/project";
+import { ProjectScreen } from "screens/project";
 export const AuthenticatedApp = () => {
   return (
     <Container>
@@ -44,12 +44,16 @@ const PageHeader = () => {
         overlay={
           <Menu>
             <Menu.Item key={"logout"}>
-              <a onClick={logout}>登出</a>
+              <Button type="link" onClick={logout}>
+                登出
+              </Button>
             </Menu.Item>
           </Menu>
         }
       >
-        <a onClick={(e) => e.preventDefault()}>Hi,{user?.name}</a>
+        <Button type="link" onClick={(e) => e.preventDefault()}>
+          Hi,{user?.name}
+        </Button>
       </Dropdown>
     </Header>
   );

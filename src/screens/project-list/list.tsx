@@ -2,8 +2,8 @@ import { User } from "./search-panel";
 import { Table, TableProps } from "antd";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
-import { Pin } from "../../Components/pin";
-import { useEditProject } from "../../utils/project";
+import { Pin } from "components/pin";
+import { useEditProject } from "utils/project";
 
 export interface Project {
   name: string;
