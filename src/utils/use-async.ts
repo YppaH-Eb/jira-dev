@@ -28,12 +28,15 @@ export const useAsync = <D>(
   });
   const [retry, setRetry] = useState(() => () => {});
   const mountedRef = useMountedRef();
-  const setData = (data: D) =>
-    setState({
-      error: null,
-      stat: "success",
-      data,
-    });
+  const setData = useCallback(
+    (data: D) =>
+      setState({
+        error: null,
+        stat: "success",
+        data,
+      }),
+    [setState]
+  );
 
   const setError = (error: Error) =>
     setState({
@@ -72,7 +75,7 @@ export const useAsync = <D>(
           return error;
         });
     },
-    [config.throwOnError, mountedRef, setData, state]
+    [config.throwOnError, mountedRef, setData]
   );
 
   return {

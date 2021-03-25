@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { doc } from "prettier";
 
 export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 export const isVoid = (value: unknown) =>
@@ -24,6 +23,7 @@ export const cleanObject = (object: { [key: string]: unknown }) => {
 export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 

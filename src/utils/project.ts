@@ -9,11 +9,11 @@ export const useProject = (params?: Partial<Project>) => {
   const { run, ...result } = useAsync<Project[]>();
   const fetchProject = useCallback(
     () => client("projects", { data: cleanObject(params || {}) }),
-    []
+    [client, params]
   );
   useEffect(() => {
     run(fetchProject(), { retry: fetchProject });
-  }, [params, fetchProject]);
+  }, [params, fetchProject, run]);
   return result;
 };
 export const useEditProject = () => {
