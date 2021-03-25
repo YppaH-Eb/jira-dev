@@ -8,10 +8,15 @@ import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
 import { Route, Navigate, Routes } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ProjectScreen } from "screens/project";
+import { useState } from "react";
+import { ProjectModal } from "./screens/project-list/project-modal";
+import { ProjectPopover } from "./components/project-popover";
 export const AuthenticatedApp = () => {
+  const [projectModalOpen, setProjectModalOpen] = useState(false);
   return (
     <Container>
       <PageHeader />
+      <Button onClick={() => setProjectModalOpen(true)}>打开</Button>
       <Main>
         {/*<ProjectListScreen />*/}
         <Router>
@@ -25,37 +30,47 @@ export const AuthenticatedApp = () => {
           </Routes>
         </Router>
       </Main>
+      <ProjectModal
+        projectModalOpen={projectModalOpen}
+        onClose={() => setProjectModalOpen(false)}
+      />
     </Container>
   );
 };
 
 const PageHeader = () => {
-  const { logout, user } = useAuth();
   return (
     <Header between={true}>
       <HeaderLeft gap={2}>
-        <Button type={"link"} onClick={resetRoute}>
+        <Button style={{ padding: 0 }} type={"link"} onClick={resetRoute}>
           <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
         </Button>
-        <div>项目</div>
+        <ProjectPopover />
         <div>用户</div>
       </HeaderLeft>
-      <Dropdown
-        overlay={
-          <Menu>
-            <Menu.Item key={"logout"}>
-              <Button type="link" onClick={logout}>
-                登出
-              </Button>
-            </Menu.Item>
-          </Menu>
-        }
-      >
-        <Button type="link" onClick={(e) => e.preventDefault()}>
-          Hi,{user?.name}
-        </Button>
-      </Dropdown>
+      <User />
     </Header>
+  );
+};
+
+const User = () => {
+  const { logout, user } = useAuth();
+  return (
+    <Dropdown
+      overlay={
+        <Menu>
+          <Menu.Item key={"logout"}>
+            <Button type="link" onClick={logout}>
+              登出
+            </Button>
+          </Menu.Item>
+        </Menu>
+      }
+    >
+      <Button type="link" onClick={(e) => e.preventDefault()}>
+        Hi,{user?.name}
+      </Button>
+    </Dropdown>
   );
 };
 
