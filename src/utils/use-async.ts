@@ -55,10 +55,8 @@ export const useAsync = <D>(
           run(runConfig?.retry(), runConfig);
         }
       });
-      setState({
-        error: null,
-        stat: "loading",
-        data: null,
+      setState((prevState) => {
+        return { ...prevState, stat: "loading" };
       });
       return promise
         .then((data) => {
