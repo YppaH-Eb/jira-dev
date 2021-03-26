@@ -5,14 +5,14 @@ import styled from "@emotion/styled";
 import { useUsers } from "utils/users";
 import { Button, Typography } from "antd";
 import { useProjectModal, useProjectSearchParams } from "./utils";
-import { useProject } from "utils/project";
+import { useProjects } from "utils/project";
 import { ErrorBox, Row } from "../../components/lib";
 
 export const ProjectListScreen = () => {
   useDocumentTitle("项目列表");
   const [param, setParam] = useProjectSearchParams();
   const debouncedParam = useDebounce(param, 500);
-  const { isLoading, error, data: list } = useProject(debouncedParam);
+  const { isLoading, error, data: list } = useProjects(debouncedParam);
   const { data: users } = useUsers();
   const { open } = useProjectModal();
   return (

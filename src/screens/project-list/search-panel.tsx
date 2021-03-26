@@ -20,9 +20,8 @@ interface SearchPanelProps {
 export const SearchPanel = ({ param, setParam, users }: SearchPanelProps) => {
   return (
     <Form css={{ marginBottom: "2rem" }} layout={"inline"}>
-      <Form.Item name={"name"}>
+      <Form.Item name={"name"} initialValue={param.name}>
         <Input
-          defaultValue={param.name}
           onChange={(evt) => setParam({ ...param, name: evt.target.value })}
         />
       </Form.Item>

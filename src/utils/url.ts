@@ -7,6 +7,7 @@ import { cleanObject } from "./index";
 
 export const useUrlQueryParams = <K extends string>(keys: K[]) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  console.log(searchParams);
   return [
     useMemo(
       () =>

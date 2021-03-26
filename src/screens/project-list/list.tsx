@@ -22,7 +22,7 @@ interface ListProps extends TableProps<Project> {
 export const List = ({ users, ...props }: ListProps) => {
   const { mutate } = useEditProject();
   const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin });
-  const { open } = useProjectModal();
+  const { startEdit } = useProjectModal();
   const columns = [
     {
       title: <Pin checked={true} disabled={true} />,
@@ -71,7 +71,7 @@ export const List = ({ users, ...props }: ListProps) => {
           <Dropdown
             overlay={
               <Menu>
-                <Menu.Item key={"edit"} onClick={open}>
+                <Menu.Item key={"edit"} onClick={() => startEdit(project.id)}>
                   编辑
                 </Menu.Item>
                 <Menu.Item key={"delete"}>删除</Menu.Item>
