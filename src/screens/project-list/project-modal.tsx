@@ -5,7 +5,13 @@ export const ProjectModal = (props: {
   onClose: () => void;
 }) => {
   return (
-    <Modal visible={props.projectModalOpen} onCancel={props.onClose}>
+    <Modal
+      title={"创建项目"}
+      okText={"确定"}
+      cancelText={"取消"}
+      visible={props.projectModalOpen}
+      onCancel={props.onClose}
+    >
       <h1>ProjectModal</h1>
     </Modal>
   );
