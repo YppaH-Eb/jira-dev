@@ -2,7 +2,7 @@ import { ProjectListScreen } from "screens/project-list";
 import { useAuth } from "context/auth-context";
 import { Button, Dropdown, Menu } from "antd";
 import styled from "@emotion/styled";
-import { resetRoute, Row } from "components/lib";
+import { ButtonNoPadding, resetRoute, Row } from "components/lib";
 import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
 
 import { Route, Navigate, Routes } from "react-router";
@@ -15,17 +15,20 @@ export const AuthenticatedApp = () => {
   const [projectModalOpen, setProjectModalOpen] = useState(false);
   return (
     <Container>
-      <PageHeader />
-      <Button onClick={() => setProjectModalOpen(true)}>打开</Button>
+      <PageHeader setProjectModalOpen={setProjectModalOpen} />
       <Main>
-        {/*<ProjectListScreen />*/}
         <Router>
           <Routes>
-            <Route path={"/projects"} element={<ProjectListScreen />}></Route>
+            <Route
+              path={"/projects"}
+              element={
+                <ProjectListScreen setProjectModalOpen={setProjectModalOpen} />
+              }
+            />
             <Route
               path={"/projects/:projectId/*"}
               element={<ProjectScreen />}
-            ></Route>
+            />
             <Navigate to={`/projects`} />
           </Routes>
         </Router>
@@ -38,14 +41,14 @@ export const AuthenticatedApp = () => {
   );
 };
 
-const PageHeader = () => {
+const PageHeader = (props: { setProjectModalOpen: (boolean) => void }) => {
   return (
     <Header between={true}>
       <HeaderLeft gap={2}>
-        <Button style={{ padding: 0 }} type={"link"} onClick={resetRoute}>
+        <ButtonNoPadding type={"link"} onClick={resetRoute}>
           <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
-        </Button>
-        <ProjectPopover />
+        </ButtonNoPadding>
+        <ProjectPopover setProjectModalOpen={props.setProjectModalOpen} />
         <div>用户</div>
       </HeaderLeft>
       <User />
