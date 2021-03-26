@@ -1,16 +1,15 @@
 import { Modal } from "antd";
+import { useProjectModal } from "./utils";
 
-export const ProjectModal = (props: {
-  projectModalOpen: boolean;
-  onClose: () => void;
-}) => {
+export const ProjectModal = () => {
+  const { projectModalOpen, close } = useProjectModal();
   return (
     <Modal
       title={"创建项目"}
       okText={"确定"}
       cancelText={"取消"}
-      visible={props.projectModalOpen}
-      onCancel={props.onClose}
+      visible={projectModalOpen}
+      onCancel={close}
     >
       <h1>ProjectModal</h1>
     </Modal>
