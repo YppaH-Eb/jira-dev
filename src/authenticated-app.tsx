@@ -10,7 +10,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { ProjectScreen } from "screens/project";
 import { ProjectModal } from "./screens/project-list/project-modal";
 import { ProjectPopover } from "./components/project-popover";
-import { useProjectModal } from "screens/project-list/utils";
 
 export const AuthenticatedApp = () => {
   return (

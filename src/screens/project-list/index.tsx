@@ -6,13 +6,13 @@ import { useUsers } from "utils/users";
 import { Button, Typography } from "antd";
 import { useProjectModal, useProjectSearchParams } from "./utils";
 import { useProject } from "utils/project";
-import { ButtonNoPadding, Row } from "../../components/lib";
+import { ErrorBox, Row } from "../../components/lib";
 
 export const ProjectListScreen = () => {
   useDocumentTitle("项目列表");
   const [param, setParam] = useProjectSearchParams();
   const debouncedParam = useDebounce(param, 500);
-  const { isLoading, error, data: list, retry } = useProject(debouncedParam);
+  const { isLoading, error, data: list } = useProject(debouncedParam);
   const { data: users } = useUsers();
   const { open } = useProjectModal();
   return (
@@ -22,11 +22,9 @@ export const ProjectListScreen = () => {
         <Button onClick={open}>新建项目</Button>
       </Row>
       <SearchPanel param={param} setParam={setParam} users={users || []} />
-      {error && (
-        <Typography.Text type={"danger"}>{error.message}</Typography.Text>
-      )}
+      <ErrorBox error={error} />
       <List
-        refresh={retry}
+        // refresh={retry}
         loading={isLoading}
         dataSource={list || []}
         users={users || []}

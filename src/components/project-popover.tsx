@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { List, Popover, Typography, Divider, Button } from "antd";
+import { List, Popover, Typography, Divider } from "antd";
 import { useProject } from "../utils/project";
 import { ButtonNoPadding } from "./lib";
 import { useProjectModal } from "../screens/project-list/utils";

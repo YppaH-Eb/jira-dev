@@ -1,6 +1,5 @@
 import { useUsers } from "utils/users";
 import { IdSelect } from "components/id-select";
-import { ReactChild } from "react";
 
 export const UserSelect = (props: React.ComponentProps<typeof IdSelect>) => {
   const { data: users } = useUsers();
