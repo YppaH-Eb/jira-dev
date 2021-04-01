@@ -3,7 +3,7 @@ import { List } from "./list";
 import { useDebounce, useDocumentTitle } from "utils";
 import styled from "@emotion/styled";
 import { useUsers } from "utils/users";
-import { Button, Typography } from "antd";
+import { Button } from "antd";
 import { useProjectModal, useProjectSearchParams } from "./utils";
 import { useProjects } from "utils/project";
 import { ErrorBox, Row } from "../../components/lib";

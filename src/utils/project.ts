@@ -1,7 +1,4 @@
-import { useCallback, useEffect } from "react";
-import { cleanObject, useDocumentTitle } from "./index";
 import { useHttp } from "./http";
-import { useAsync } from "./use-async";
 import { Project } from "../screens/project-list/list";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
@@ -43,6 +40,6 @@ export const useAddProject = () => {
 export const useProject = (id?: number) => {
   const client = useHttp();
   return useQuery<Project>(["project", id], () => client(`projects/${id}`), {
-    enabled: Boolean(id),
+    enabled: Boolean(id), //id不存在时不会发请求
   });
 };
