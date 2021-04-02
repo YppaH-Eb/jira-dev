@@ -7,14 +7,13 @@ import { cleanObject } from "./index";
 
 export const useUrlQueryParams = <K extends string>(keys: K[]) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams);
   return [
     useMemo(
       () =>
         keys.reduce((prev, key) => {
           return { ...prev, [key]: searchParams.get(key) || "" };
         }, {} as { [key in K]: string }),
-      [searchParams]
+      [searchParams, keys]
     ),
     (params: Partial<{ [key in K]: unknown }>) => {
       const o = cleanObject({
